@@ -25,7 +25,8 @@
       text-align: center;
     }
     .btn:hover{
-      background: #7b621e;
+      border: 1px solid black;
+      background: #ffbd03;
       color: black;
     }
   </style>
@@ -51,21 +52,21 @@
         <div class="card m-3" >
           <div class="card-body " style="background: #5adbb5; border-radius: 20px;display:grid;grid-template-columns:auto auto;">
             <h5>User Login</h5>
-            <a href="/user_mg/" class="btn"><box-icon name='right-arrow-alt'></box-icon></a>
+            <a href="{{url_for('userIndex')}}" class="btn"><box-icon name='right-arrow-alt'></box-icon></a>
           </div>
         </div>
   <!-------------------------------------->
         <div class="card m-3" >
           <div class="card-body bg-info" style="border-radius: 20px;display:grid;grid-template-columns:auto auto;">
             <h5>Admin Login</h5>
-            <a href="/user_mg/" class="btn"><box-icon name='right-arrow-alt'></box-icon></a>
+            <a href="{{url_for('adminIndex')}}" class="btn"><box-icon name='right-arrow-alt'></box-icon></a>
           </div>
         </div>
   <!-------------------------------------->
         <div class="card m-3" style="border: none;">
           <div class="card-body bg-danger" style="border-radius: 20px;display:grid;grid-template-columns:auto auto;" >
             <h5>User Register</h5>
-            <a href="/user_mg/" class="btn"><box-icon name='right-arrow-alt'></box-icon></a>
+            <a href="#" class="btn"><box-icon name='right-arrow-alt'></box-icon></a>
           </div>
         </div>
       <!-------------------------------------->
