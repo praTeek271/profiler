@@ -9,6 +9,7 @@ def adminIndex():
 
 
 @app.route('/user')
+
 def userIndex():
     return (render_template('user/index.html',title="User1"))
 if __name__=='__main__':
