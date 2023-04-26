@@ -44,6 +44,7 @@
 
         * {
             box-sizing: inherit;
+            font-weight: 500;
         }
 
         html {
@@ -99,7 +100,7 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">PROFILER</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -153,6 +154,19 @@
             <div class="accordion-item auth_box auth_block">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed auth_block" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Sign Up
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body" id="includeHtml_signup">
+
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item auth_box auth_block">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed auth_block" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         Sign Out
                     </button>
@@ -165,19 +179,7 @@
                     </div>
                 </div>
             </div>
-            <div class="accordion-item auth_box auth_block">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed auth_block" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Sign Up
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body" id="includeHtml_signup">
-
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
     <!-- scripts -->
