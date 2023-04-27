@@ -24,14 +24,15 @@
       width: 50px;
       height: auto;
       text-align: center;
+      box-shadow: 4px 3px 4px #88888899;
     }
 
-    .btn:hover {
-      border: 1px solid black;
+    .btn:hover,.btn:active,.btn:not(.btn-check)+.btn:active{
+      /* border: 1px solid black; */
+      box-shadow: 1px 0px 4px #88888899;
       background: #ffbd03;
       color: black;
     }
-
     .box_icon {
       width: 24px;
       height: 41px;
