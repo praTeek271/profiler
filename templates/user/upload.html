@@ -1,0 +1,16 @@
+{%extends 'user/basic_layout.html' %}
+{% block content %}
+{% block style %}
+<style>
+.container{
+    color: white;
+}
+</style>
+{% endblock style %}
+<div class="container">
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file"><br><br>
+    <input type="submit" value="Upload">
+</form>
+</div>
+{% endblock content %}
