@@ -28,17 +28,17 @@ def upload_file():
             return redirect(url_for('download_file', name=filename))
     return render_template('user/upload.html')
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return ('.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS)
 
 @app.route('/uploads/<name>')
 def download_file(name):
-    return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+    return (send_from_directory(app.config["UPLOAD_FOLDER"], name))
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return(render_template('index.html'))
 
 @app.route('/user/login')
 def signup():
@@ -46,10 +46,11 @@ def signup():
 
 @app.route('/admin')
 def adminIndex():
-    return (render_template('admin/index.html'))
+    return (render_template('admin/index.html',title))
 
 if __name__=="__main__":
     # with debug = True:
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.add_url_rule("/uploads/<name>", endpoint="download_file", build_only=True)
     app.run(debug=True, port=8001)
+
