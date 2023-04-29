@@ -68,7 +68,7 @@ def signup():
 
     
 
-    return (render_template('user/user_log_signup.html',title="User1"))
+    return(render_template('user/user_log_signup.html',title="User1"))
 
 @app.route('/admin')
 def adminIndex():
