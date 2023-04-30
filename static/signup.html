@@ -237,7 +237,14 @@
 <body class="align">
 
   <div class="grid">
-    <form action="{% url 'signin'%}" method="POST" class="form login">
+    <form action="/user/signup" method="POST" class="form login">
+      <!-- name -->
+      <div class="form__field">
+        <label for="login__username"><svg class="icon">
+            <use xlink:href="#icon-user"></use>
+          </svg><span class="hidden">Name</span></label>
+        <input id="login__name" type="text" name="name" class="form__input" placeholder="Name" required>
+      </div>
       <!-- username -->
       <div class="form__field">
         <label for="login__username"><svg class="icon">
@@ -249,16 +256,9 @@
       <!-- email -->
       <div class="form__field">
         <label for="login__email"><svg class="icon">
-            <use xlink:href="#icon-user"></use>
+            <use xlink:href="#icon-email"></use>
           </svg><span class="hidden">Email</span></label>
-        <input id="login__email" type="email" name="example@email.com" class="form__input" placeholder="Email" required>
-      </div>
-      <!-- phone no -->
-      <div class="form__field">
-        <label for="login__Password"><svg class="icon">
-            <use xlink:href="#icon-user"></use>
-          </svg><span class="hidden">Password</span></label>
-        <input id="login__Password" type="text" name="Password" class="form__input" placeholder="Password" required>
+        <input id="login__email" type="email" name="email" class="form__input" placeholder="example@email.com" required>
       </div>
       <!-- password -->
       <div class="form__field">
@@ -267,6 +267,9 @@
           </svg><span class="hidden">Password</span></label>
         <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
       </div>
+
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      
       <!-- submit -->
       <div class="form__field">
         <input type="submit" value="Sign In">
@@ -292,6 +295,10 @@
     <symbol id="icon-user" viewBox="0 0 1792 1792">
       <path
         d="M1600 1405q0 120-73 189.5t-194 69.5H459q-121 0-194-69.5T192 1405q0-53 3.5-103.5t14-109T236 1084t43-97.5 62-81 85.5-53.5T538 832q9 0 42 21.5t74.5 48 108 48T896 971t133.5-21.5 108-48 74.5-48 42-21.5q61 0 111.5 20t85.5 53.5 62 81 43 97.5 26.5 108.5 14 109 3.5 103.5zm-320-893q0 159-112.5 271.5T896 896 624.5 783.5 512 512t112.5-271.5T896 128t271.5 112.5T1280 512z" />
+    </symbol>
+    <symbol id="icon-email" viewBox="0 0 1792 1792">
+      <path
+        d="M1792 1344v128q0 26-19 45t-45 19H64q-26 0-45-19T0 1472v-128q0-6 3.5-15.5t8.5-16.5l704-704L1780 131q5 10 8.5 16.5t3.5 15.5zm0-384L1024 896 0 960v-64L1024 832l768 128zm0-256L1024 640 0 704V448l1024 128 768-128v256z" />
     </symbol>
   </svg>
 
