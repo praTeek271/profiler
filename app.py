@@ -63,6 +63,23 @@ def download_file(name):
 @app.route('/')
 def index():
     return(render_template('index.html'))
+@app.route('/user/signin', methods=['POST','GET'])
+def signin_data_store():
+    if request.method=='POST':
+        username=request.form['username']
+        password=request.form['password']
+        if username=="" or password=="":
+            flash("Please enter the values properly")
+            return redirect(url_for('signup'))
+        else:
+            user=User().query.filter_by(username=username).first()
+            if user and bcrypt.check_password_hash(user.password,password):
+                flash("Login Successful")
+                return redirect(url_for('userIndex'))
+            else:
+                flash("Invalid Credentials")
+                return redirect(url_for('signup'))
+    pass
 @app.route('/user/signup', methods=['POST','GET'])
 def signup_data_store():
     if request.method=='POST':
@@ -76,18 +93,20 @@ def signup_data_store():
             return redirect(url_for('signup'))
 
         else:
-            is_unique(username=username, email=email)
-            if is_unique:
-                flash("Username or Email already taken")
+            data_unique=User().query.filter_by(email=email).first()
+            if data_unique:
+                flash("Username or Email already taken",'warning')
+                print("--------------------------------->\tUsername or Email already taken")
                 return redirect(url_for('signup'))
-            hash_password=bcrypt.generate_password_hash(password,10)
-            user=User(name=name, username=username, email=email, password=hash_password)
-            db.session.add(user)
-            db.session.commit()
-            flash("User added successfully",'danger')
-            flash("Account is Created")
-            flash("Please login to continue")
-            return redirect(url_for('userIndex'))
+            else:
+                hash_password=bcrypt.generate_password_hash(password,10)
+                user=User(name=name, username=username, email=email, password=hash_password)
+                db.session.add(user)
+                db.session.commit()
+                flash("User added successfully",'danger')
+                flash("Account is Created")
+                flash("Please login to continue")
+                return redirect(url_for('userIndex'))
     else:
         return redirect(url_for('signup'))
 

@@ -43,8 +43,8 @@
             background: #FF4365;
             border-radius: 10px;
         }
-<!-------------------------------------------------------------------------->
-        :root {
+
+        < !--------------------------------------------------------------------------> :root {
             --htmlFontSize: 100%;
             --bodyFontFamily: "Open Sans";
             --bodyFontFamilyFallback: sans-serif;
@@ -103,10 +103,12 @@
         .collapsed {
             color: #adb5bd;
         }
-        .signout{
+
+        .signout {
             background-color: #FF4365;
         }
-        .signout:hover{
+
+        .signout:hover {
             background-color: #d03a55;
         }
     </style>
@@ -131,8 +133,8 @@
                         <a class="nav-link" href="#">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('upload_file')}}" >
-                            <box-icon name='message-square-add' animation='flashing' color='#e6e6e6' ></box-icon>
+                        <a class="nav-link" href="{{url_for('upload_file')}}">
+                            <box-icon name='message-square-add' animation='flashing' color='#e6e6e6'></box-icon>
                         </a>
                     </li>
                 </ul>
@@ -144,11 +146,13 @@
 
 
     <div class="align grid">
+        
         <div class="accordion" id="accordionExample" style="width: 345px;">
             <div class="accordion-item auth_box auth_block">
                 <h2 class="accordion-header">
                     <button class="accordion-button auth_block" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <!-- close flashes -->
                         Login
                     </button>
                 </h2>
@@ -158,11 +162,11 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="accordion-item auth_box auth_block">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed auth_block" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         Sign Up
                     </button>
                 </h2>
@@ -175,10 +179,10 @@
             <div class="accordion-item auth_box auth_block">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed auth_block" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Sign Out
-                    </button>
-                </h2>
+                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Sign Out
+                </button>
+            </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <div class="vstack gap-2 col-md-5 mx-auto">
@@ -189,9 +193,21 @@
                     </div>
                 </div>
             </div>
-
+            
         </div>
     </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for category, message in messages %}
+        <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+            <strong>OOPs !</strong> {{ message }}.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
     <!-- scripts -->
     <!-------------------------------------------------------------------------------------------->
     <!-- bootstrap stripts -->
