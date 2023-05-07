@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 import os
+from pathlib import Path
 
 # simple flask app
 app = Flask(__name__)
@@ -15,7 +16,7 @@ db=SQLAlchemy(app)
 
 # create table
 bcrypt=Bcrypt(app)  # for password hashing
-BASE_DIR=os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = Path(__file__).resolve().parent.parent
 # user class
 class User(db.Model):
     id=db.Column(db.Integer, primary_key=True)
@@ -31,9 +32,15 @@ class User(db.Model):
 with app.app_context():
     # db.init_app(app)
     db.create_all()
+
+UPLOAD_FOLDER = 'D:/Lucifer-Drive/Programs/blockchain project/flask_app/UPLOAD_FOLDER'
+print(UPLOAD_FOLDER)
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 #upload_page
-UPLOAD_FOLDER = "UPLOAD_FOLDER"
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg'}
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -49,12 +56,9 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
             return redirect(url_for('download_file', name=filename))
-    return render_template('user/upload.html')
-def allowed_file(filename):
-    return ('.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS)
+    return render_template('/user/upload.html')
 @app.route('/uploads/<name>')
 def download_file(name):
     return (send_from_directory(app.config["UPLOAD_FOLDER"], name))
@@ -135,9 +139,6 @@ def is_unique(username,email):
 #         fn = secure_filename(file.filename)
 #         file.save(os.path.join(BASE_DIR, fn))  # replace FILES_DIR with your own directory
 #     return 'false'  # change to your own logic
-
-
-
 
 if __name__=="__main__":
     # with debug = True:
