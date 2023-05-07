@@ -15,7 +15,7 @@ db=SQLAlchemy(app)
 
 # create table
 bcrypt=Bcrypt(app)  # for password hashing
-
+BASE_DIR=os.path.dirname(os.path.abspath(__file__))
 # user class
 class User(db.Model):
     id=db.Column(db.Integer, primary_key=True)
@@ -126,7 +126,19 @@ def is_unique(username,email):
     user=User().query.filter_by(username=username).first()
     email=User().query.filter_by(email=email).first()
     return(user and email)
-    
+
+
+# @app.route('/upload', methods=('POST',))
+# def upload():
+#     files = request.files.getlist('files')
+#     for file in files:
+#         fn = secure_filename(file.filename)
+#         file.save(os.path.join(BASE_DIR, fn))  # replace FILES_DIR with your own directory
+#     return 'false'  # change to your own logic
+
+
+
+
 if __name__=="__main__":
     # with debug = True:
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

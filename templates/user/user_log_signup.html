@@ -74,6 +74,16 @@
             min-block-size: 100vh;
         }
 
+        .alert-message {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px;
+            border: 1px solid black;
+            background-color: #f2f2f2;
+        }
+
         .align {
             display: grid;
             place-items: center;
@@ -112,6 +122,40 @@
             background-color: #d03a55;
         }
     </style>
+    <script>
+        let alertCounter = 0;
+
+        function createAlert() {
+            const alertContainer = document.getElementById('alert-container');
+
+            // create alert message element
+            const alertMessage = document.createElement('div');
+            alertMessage.classList.add('alert-message');
+            alertMessage.innerText = `This is alert message ${alertCounter}`;
+
+            // add alert message to container
+            alertContainer.appendChild(alertMessage);
+
+            // position alert message based on previous messages
+            const previousMessage = alertMessage.previousSibling;
+            if (previousMessage) {
+                const previousMessageHeight = previousMessage.getBoundingClientRect().height;
+                const previousMessageBottom = parseInt(window.getComputedStyle(previousMessage).bottom);
+                alertMessage.style.bottom = `${previousMessageBottom + previousMessageHeight + 10}px`;
+            }
+
+            // delete alert message after 5 seconds
+            setTimeout(() => {
+                alertMessage.remove();
+            }, 5000);
+
+            // increment alert counter
+            alertCounter++;
+        }
+
+    // call createAlert() function to create alert messages without clicking the button
+
+    </script>
 </head>
 
 <body>
@@ -144,70 +188,70 @@
     <!-- Body -->
 
 
+    <section class="body" id="alert-container">
+        <div class="align grid">
 
-    <div class="align grid">
-        
-        <div class="accordion" id="accordionExample" style="width: 345px;">
-            <div class="accordion-item auth_box auth_block">
-                <h2 class="accordion-header">
-                    <button class="accordion-button auth_block" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <!-- close flashes -->
-                        Login
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                    <div class="accordion-body" id="includeHtml_signin">
-                        <!-- included the login pagehtml -->
-                    </div>
-                </div>
-            </div>
-            
-            <div class="accordion-item auth_box auth_block">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed auth_block" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Sign Up
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body" id="includeHtml_signup">
-
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item auth_box auth_block">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed auth_block" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Sign Out
-                </button>
-            </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="vstack gap-2 col-md-5 mx-auto">
-                            <button type="button" class="btn btn-secondary signout"> Sign
-                                Out</button>
-                            <button type="button" class="btn btn-outline-secondary ">Login</button>
+            <div class="accordion" id="accordionExample" style="width: 345px;">
+                <div class="accordion-item auth_box auth_block">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button auth_block" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <!-- close flashes -->
+                            Login
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body" id="includeHtml_signin">
+                            <!-- included the login pagehtml -->
                         </div>
                     </div>
                 </div>
+
+                <div class="accordion-item auth_box auth_block">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed auth_block" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Sign Up
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body" id="includeHtml_signup">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item auth_box auth_block">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed auth_block" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Sign Out
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="vstack gap-2 col-md-5 mx-auto">
+                                <button type="button" class="btn btn-secondary signout"> Sign
+                                    Out</button>
+                                <button type="button" class="btn btn-outline-secondary ">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            
         </div>
-    </div>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <ul class=flashes>
-        {% for category, message in messages %}
-        <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-            <strong>OOPs !</strong> {{ message }}.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+            <script>
+                createAlert('{{ message }}');
+            </script>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </section>
     <!-- scripts -->
     <!-------------------------------------------------------------------------------------------->
     <!-- bootstrap stripts -->

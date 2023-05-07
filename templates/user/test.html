@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .alert-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: alert-slide-in 0.3s ease;
+        }
+
+        .alert-message+.alert-message {
+            margin-top: 10px;
+        }
+
+        @keyframes alert-slide-in {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="createAlert()">Create Alert</button>
+    <div id="alert-container"></div>
+    <script>
+        let alertCounter = 0;
+
+        function createAlert() {
+            const alertContainer = document.getElementById('alert-container');
+
+            // create alert message element
+            const alertMessage = document.createElement('div');
+            alertMessage.classList.add('alert-message');
+            alertMessage.innerText = `This is alert message ${alertCounter}`;
+
+            // add alert message to container
+            alertContainer.appendChild(alertMessage);
+
+            // position alert message based on previous messages
+            const previousMessage = alertMessage.previousSibling;
+            if (previousMessage) {
+                const previousMessageHeight = previousMessage.getBoundingClientRect().height;
+                const previousMessageBottom = parseInt(window.getComputedStyle(previousMessage).bottom);
+                alertMessage.style.bottom = `${previousMessageBottom + previousMessageHeight + 10}px`;
+            }
+
+            // delete alert message after 5 seconds
+            setTimeout(() => {
+                alertMessage.remove();
+            }, 5000);
+
+            // increment alert counter
+            alertCounter++;
+        }
+
+
+    </script>
+</body>
+
+</html>
